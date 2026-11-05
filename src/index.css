@@ -22,6 +22,8 @@
   --star-off: rgba(255, 255, 255, 0.14);
   --star-edge: rgba(255, 209, 102, 0.55);
   --grad: linear-gradient(120deg, var(--pink), var(--violet) 55%, #4bb6ff);
+  --mini-bg: rgba(28, 16, 56, 0.94);
+  --mini-edge: rgba(255, 111, 174, 0.45);
   --r: 24px;
   --r-s: 14px;
   --display: 'Unbounded', ui-rounded, system-ui, sans-serif;
@@ -48,6 +50,8 @@
     --star: #ffb800;
     --star-off: rgba(29, 18, 54, 0.12);
     --star-edge: rgba(196, 138, 0, 0.5);
+    --mini-bg: rgba(255, 255, 255, 0.96);
+    --mini-edge: rgba(124, 92, 255, 0.35);
     color-scheme: light;
   }
 }
@@ -401,9 +405,10 @@ button {
   gap: 8px;
   padding: 8px 16px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  border: 1px solid var(--glass-edge);
-  box-shadow: var(--shadow);
+  /* opaque, theme-contrasting surface so it reads over both cards and background */
+  background: var(--mini-bg);
+  border: 1px solid var(--mini-edge);
+  box-shadow: 0 10px 30px -8px rgba(60, 20, 120, 0.45), 0 0 0 4px color-mix(in srgb, var(--pink) 10%, transparent);
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   white-space: nowrap;
@@ -523,7 +528,7 @@ button {
   pointer-events: none;
 }
 .field--big .stepper {
-  grid-template-columns: 64px 1fr 64px;
+  grid-template-columns: 58px 1fr 58px;
 }
 .field--big .stepper__btn,
 .field--big .stepper__value {
@@ -531,8 +536,10 @@ button {
   border-radius: 20px;
 }
 .field--big .stepper__input {
-  font-size: 34px;
+  font-size: clamp(22px, 6.6vw, 34px);
   font-weight: 700;
+  /* leave room for the € / ₴ unit on the right (UAH amounts are wider) */
+  padding: 0 30px 0 12px;
 }
 .field--big .stepper__unit {
   font-size: 20px;

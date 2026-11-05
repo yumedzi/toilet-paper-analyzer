@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useT, fmt, fmtEur } from '../i18n'
+import { useT, fmt, money, perCur } from '../i18n'
 import type { Metrics } from '../model/score'
 import type { Advice } from '../model/advice'
 import { AnimatedNumber } from './AnimatedNumber'
@@ -8,7 +8,7 @@ import { Stars } from './Stars'
 export const verdictIndex = (stars: number) => Math.max(0, Math.min(5, Math.floor(stars)))
 
 export function AdviceList({ items }: { items: Advice[] }) {
-  const { t } = useT()
+  const { t, cur } = useT()
   return (
     <ul className="advice">
       <AnimatePresence initial={false} mode="popLayout">
@@ -23,7 +23,7 @@ export function AdviceList({ items }: { items: Advice[] }) {
             transition={{ delay: i * 0.05, type: 'spring', stiffness: 380, damping: 30 }}
           >
             <span className="advice__dot" aria-hidden />
-            {t.advice[a.key](a.params)}
+            {t.advice[a.key]({ ...a.params, cur: cur.sym })}
           </motion.li>
         ))}
       </AnimatePresence>
@@ -32,7 +32,7 @@ export function AdviceList({ items }: { items: Advice[] }) {
 }
 
 export function ResultCard({ m, advice, hasPrice }: { m: Metrics; advice: Advice[]; hasPrice: boolean }) {
-  const { t } = useT()
+  const { t, cur } = useT()
   const up = m.vsTypical >= 1
   return (
     <section className={`card result result--s${Math.floor(m.stars)}`}>
@@ -42,10 +42,10 @@ export function ResultCard({ m, advice, hasPrice }: { m: Metrics; advice: Advice
           <div className="result__top">
             <div>
               <div className="result__big">
-                <AnimatedNumber value={m.wipesPerEur} format={(n) => fmt(t, n, 0)} />
+                <AnimatedNumber value={perCur(cur, m.wipesPerEur)} format={(n) => fmt(t, n, 0)} />
               </div>
               <div className="result__unit" title={t.headlineHint}>
-                {t.headline}
+                {t.headline(cur)}
               </div>
             </div>
             <div className="result__rating">
@@ -59,9 +59,12 @@ export function ResultCard({ m, advice, hasPrice }: { m: Metrics; advice: Advice
             {t.vsTypical({ sign: up ? '+' : '−', pct: Math.round(Math.abs(m.vsTypical - 1) * 100) })}
           </div>
           <div className="metrics">
-            <div><b>{fmtEur(t, m.eurPer100Sheets)}</b><span>{t.perSheet}</span></div>
-            <div><b>{fmtEur(t, m.eurPerRoll)}</b><span>{t.perRoll}</span></div>
-            <div><b>{fmt(t, m.eurPerMeter * 100, 1)}¢</b><span>{t.perMeter}</span></div>
+            <div><b>{money(t, cur, m.eurPer100Sheets)}</b><span>{t.perSheet(cur)}</span></div>
+            <div><b>{money(t, cur, m.eurPerRoll)}</b><span>{t.perRoll(cur)}</span></div>
+            <div>
+              <b>{cur.code === 'EUR' ? `${fmt(t, m.eurPerMeter * 100, 1)}¢` : money(t, cur, m.eurPerMeter)}</b>
+              <span>{t.perMeter(cur)}</span>
+            </div>
           </div>
           <AdviceList items={advice} />
         </>
@@ -74,13 +77,13 @@ export function ResultCard({ m, advice, hasPrice }: { m: Metrics; advice: Advice
 
 /** Slim bar that sticks to the top once the big card scrolls away. */
 export function MiniResult({ m, show }: { m: Metrics; show: boolean }) {
-  const { t } = useT()
+  const { t, cur } = useT()
   return (
     <AnimatePresence>
       {show && (
         <motion.div className="mini" initial={{ y: -70, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -70, opacity: 0 }} transition={{ type: 'spring', stiffness: 420, damping: 34 }}>
-          <b className="mini__num tabular">{fmt(t, m.wipesPerEur, 0)}</b>
-          <span className="mini__unit">{t.headline}</span>
+          <b className="mini__num tabular">{fmt(t, perCur(cur, m.wipesPerEur), 0)}</b>
+          <span className="mini__unit">{t.headline(cur)}</span>
           <Stars value={m.stars} size={16} />
         </motion.div>
       )}

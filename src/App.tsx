@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { DICTS, LangCtx, type Lang } from './i18n'
+import { DICTS, LangCtx, FALLBACK_UAH_RATE, makeCur, type CurCode, type Lang } from './i18n'
 import { evaluate, STD_SHEET, type Pack } from './model/score'
 import { advise } from './model/advice'
 import { load, store, haptic } from './haptic'
@@ -39,6 +39,29 @@ export default function App() {
   useEffect(() => {
     document.documentElement.lang = lang
   }, [lang])
+
+  // currency: prices are stored in EUR, UAH converts at the National Bank of Ukraine official rate
+  const [curCode, setCurCode] = useState<CurCode>(() => load<CurCode>('rc.cur', 'EUR'))
+  const [uahRate, setUahRate] = useState<number>(() => load<number>('rc.uahRate', FALLBACK_UAH_RATE))
+  const setCur = useCallback((c: CurCode) => {
+    setCurCode(c)
+    store('rc.cur', c)
+  }, [])
+  useEffect(() => {
+    fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=EUR&json')
+      .then((r) => r.json())
+      .then((d: { rate?: number }[]) => {
+        const r = d?.[0]?.rate
+        if (r && r > 20 && r < 200) {
+          setUahRate(r)
+          store('rc.uahRate', r)
+        }
+      })
+      .catch(() => {
+        /* offline: keep cached / fallback rate */
+      })
+  }, [])
+  const cur = useMemo(() => makeCur(curCode, uahRate), [curCode, uahRate])
 
   const [splash, setSplash] = useState(true)
   const [tab, setTab] = useState<Tab>('check')
@@ -143,7 +166,7 @@ export default function App() {
   }
 
   return (
-    <LangCtx.Provider value={{ t, lang, setLang }}>
+    <LangCtx.Provider value={{ t, lang, setLang, cur, setCur }}>
       <div className="aurora" aria-hidden>
         <i /> <i /> <i />
       </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { useT } from '../i18n'
+import { useT, type CurCode } from '../i18n'
 import { haptic } from '../haptic'
 import { BENCHMARKS } from '../data/benchmarks'
 import type { Pack } from '../model/score'
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export function EntryForm({ draft, set, priceRef }: Props) {
-  const { t } = useT()
+  const { t, cur, setCur } = useT()
   const [mode, setMode] = useState<'sheets' | 'meters'>('sheets')
   const [open, setOpen] = useState(false)
   const meters = Math.round(((draft.sheetsPerRoll * draft.sheetH) / 100) * 10) / 10
@@ -62,18 +62,44 @@ export function EntryForm({ draft, set, priceRef }: Props) {
         </div>
       </div>
 
-      <Stepper
-        id="price"
-        big
-        label={t.price}
-        value={draft.price}
-        onChange={(price) => set({ price })}
-        step={0.1}
-        digits={2}
-        max={200}
-        unit="€"
-        inputRef={priceRef}
-      />
+      <div className="field">
+        <div className="field__row">
+          <label className="field__label" htmlFor="price">
+            {t.price}
+          </label>
+          <div className="seg seg--mini" role="radiogroup" aria-label={t.currency}>
+            {(['EUR', 'UAH'] as CurCode[]).map((c) => (
+              <button
+                key={c}
+                type="button"
+                role="radio"
+                aria-checked={cur.code === c}
+                className={`seg__opt ${cur.code === c ? 'seg__opt--on' : ''}`}
+                onClick={() => {
+                  setCur(c)
+                  haptic(8)
+                }}
+              >
+                {cur.code === c && <motion.span layoutId="cur-pill" className="seg__pill" />}
+                <span className="seg__txt">{c === 'EUR' ? '€ EUR' : '₴ UAH'}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+        {/* price is stored in EUR; the field shows/accepts the selected currency */}
+        <Stepper
+          id="price"
+          big
+          label={<span className="sr-only">{t.price}</span>}
+          value={Math.round(draft.price * cur.rate * 100) / 100}
+          onChange={(v) => set({ price: v / cur.rate })}
+          step={cur.code === 'UAH' ? 1 : 0.1}
+          digits={2}
+          max={200 * cur.rate}
+          unit={cur.sym}
+          inputRef={priceRef}
+        />
+      </div>
 
       <div className="field">
         <span className="field__label">{t.ply}</span>

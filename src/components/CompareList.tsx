@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { useT, fmt, fmtEur } from '../i18n'
+import { useT, fmt, money, perCur } from '../i18n'
 import { evaluate, type Pack } from '../model/score'
 import { advise } from '../model/advice'
 import { Stars } from './Stars'
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export function CompareList({ packs, onEdit, onDuplicate, onRemove, onClear }: Props) {
-  const { t } = useT()
+  const { t, cur } = useT()
   const [openId, setOpenId] = useState<string | null>(null)
   const ranked = packs
     .map((p) => ({ p, m: evaluate(p) }))
@@ -65,15 +65,15 @@ export function CompareList({ packs, onEdit, onDuplicate, onRemove, onClear }: P
                   <span className="rank__main">
                     <span className="rank__name">{p.name}</span>
                     <span className="rank__sub">
-                      {fmtEur(t, p.price)} · {p.rolls}×{p.sheetsPerRoll} · {t.plyN({ n: p.ply })}
+                      {money(t, cur, p.price)} · {p.rolls}×{p.sheetsPerRoll} · {t.plyN({ n: p.ply })}
                     </span>
                     <span className="bar">
                       <motion.span className="bar__fill" initial={{ width: 0 }} animate={{ width: `${(m.wipesPerEur / best) * 100}%` }} transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }} />
                     </span>
                   </span>
                   <span className="rank__score">
-                    <b className="tabular">{fmt(t, m.wipesPerEur, 0)}</b>
-                    <small>{t.headline}</small>
+                    <b className="tabular">{fmt(t, perCur(cur, m.wipesPerEur), 0)}</b>
+                    <small>{t.headline(cur)}</small>
                     <Stars value={m.stars} size={13} />
                   </span>
                 </button>

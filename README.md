@@ -7,7 +7,7 @@ A mobile-first web app for the supermarket aisle. Enter a pack's price, rolls, s
 - **honest advice**, e.g. *"42% pricier than Pack #1 at the till, BUT 126% more paper per €. Worth it."*
 - a **compare** view that ranks every pack you've checked and crowns the winner
 
-It is available in English and Ukrainian (EN / UA) and keeps saved packs in your browser (localStorage).
+It is available in English and Ukrainian (EN / UA). You can enter prices in **EUR** (the default) or **UAH**. Hryvnia prices are converted at the National Bank of Ukraine's official rate, fetched live and cached for offline use, and the headline then reads *wipes per 100 ₴*. Saved packs stay in your browser (localStorage).
 
 ## The model
 
