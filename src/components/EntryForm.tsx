@@ -13,7 +13,20 @@ const SIZES: { w: number; h: number; tag: string }[] = [
   { w: 10, h: 10, tag: '□' },
   { w: 10, h: 13.5, tag: 'XL' },
 ]
-const TEMPLATES = BENCHMARKS.filter((_, i) => [1, 0, 6, 14, 16, 18, 13, 2].includes(i))
+// Bulgarian dm packs first (primary shopping area), then a few EU shelf classics
+const PICK = [
+  'Sanft&Sicher Classic 3-ply 10×220',
+  'Sanft&Sicher Recycling 3-ply 8×220',
+  'Sanft&Sicher Limited 3-ply 8×180',
+  'Sanft&Sicher Premium 4-ply 10×200',
+  'Sanft&Sicher Balsam 4-ply 8×150',
+  'Sanft&Sicher Deluxe 5-ply 8×130',
+  'Zewa Ultra Smart 4-ply 4×300',
+  'Kokett 3-ply 10×220',
+  'Floralys Extrasoft 3-ply 10×200',
+  'Zewa bewährt 3-ply 8×150',
+]
+const TEMPLATES = PICK.map((n) => BENCHMARKS.find((b) => b.name === n)!).filter(Boolean)
 
 interface Props {
   draft: Pack
@@ -43,7 +56,7 @@ export function EntryForm({ draft, set, priceRef }: Props) {
               }}
             >
               <b>{b.brand}</b> {b.ply}× · {b.rolls}×{b.sheetsPerRoll}
-              <small>{b.shop}</small>
+              <small>{b.shop} {b.country === 'BG' ? '🇧🇬' : ''}</small>
             </button>
           ))}
         </div>

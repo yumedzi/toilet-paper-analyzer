@@ -68,13 +68,21 @@ export default function App() {
   }, [focusPrice])
 
   // mini sticky score once the big card leaves the viewport
+  // (scroll-based, so it never shows while the header/big score is visible — e.g. right after load)
   useEffect(() => {
-    const el = cardRef.current
-    if (!el || splash) return
-    const io = new IntersectionObserver(([e]) => setShowMini(!e.isIntersecting), { threshold: 0, rootMargin: '-40px 0px 0px 0px' })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [splash, tab])
+    const check = () => {
+      const el = cardRef.current
+      // show only when scrolled down AND the big score's number row is above the viewport
+      setShowMini(!!el && window.scrollY > 120 && el.getBoundingClientRect().top + 110 < 0)
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return () => {
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+    }
+  }, [tab])
 
   const set = useCallback((patch: Partial<Pack>) => setDraft((d) => ({ ...d, ...patch })), [])
   const metrics = useMemo(() => evaluate(draft), [draft])

@@ -23,7 +23,7 @@ Ply factors are **sub-linear**. Thicker sheets mean fewer sheets per visit, but 
 
 **Stars** = 70% value + 30% comfort, rounded to the nearest half star.
 
-- **Value**: wipes/€ compared with the median of ~20 regular packs from Lidl, ALDI, Norma, EDEKA, Rossmann, Albert Heijn, Carrefour, Mercadona, Tesco IE and Biedronka (2025–26). The median scores 3★, about 1.5× the median scores 5★, and about ⅔ of the median scores 1★.
+- **Value**: wipes/€ compared with the median of ~30 regular packs. That includes 11 packs from **dm Bulgaria**, with prices and sheet counts read from dm-drogeriemarkt.bg in Nov 2026; these come first in the quick-pick templates. The rest are from Lidl, ALDI, Norma, EDEKA, Rossmann, Albert Heijn, Carrefour, Mercadona, Tesco IE and Biedronka (2025–26). The median scores 3★, about 1.5× the median scores 5★, and about ⅔ of the median scores 1★.
 - **Comfort**: ply, sheet size (VKI documented shrinkflation in sheet sizes), softness, and whether the paper is recycled.
 
 Benchmark data and sources are in [`src/data/benchmarks.ts`](src/data/benchmarks.ts). Rows marked `est` are typical or promo prices, not live shelf prices.

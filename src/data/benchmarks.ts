@@ -18,6 +18,20 @@ export interface Benchmark {
 }
 
 export const BENCHMARKS: Benchmark[] = [
+  // dm Bulgaria — prices (EUR) and sheets/roll read from dm-drogeriemarkt.bg on 2026-11-05
+  { name: 'Sanft&Sicher Classic 3-ply 20×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 20, sheetsPerRoll: 220, ply: 3, priceEur: 8.65, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1892806' },
+  { name: 'Sanft&Sicher Classic 3-ply 10×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 10, sheetsPerRoll: 220, ply: 3, priceEur: 5.15, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1892805' },
+  { name: 'Sanft&Sicher Recycling 3-ply 8×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 220, ply: 3, priceEur: 3.2, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/2477883' },
+  { name: 'Sanft&Sicher Limited 3-ply 8×180', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 180, ply: 3, priceEur: 3.55, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1587820' },
+  { name: 'Sanft&Sicher Premium 4-ply 20×200', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 20, sheetsPerRoll: 200, ply: 4, priceEur: 9.7, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/3156124' },
+  { name: 'Sanft&Sicher Premium 4-ply 10×200', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 10, sheetsPerRoll: 200, ply: 4, priceEur: 5.6, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/3156125' },
+  { name: 'Sanft&Sicher 4-ply 10×180', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 10, sheetsPerRoll: 180, ply: 4, priceEur: 5.6, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1700999' },
+  { name: 'Sanft&Sicher Balsam 4-ply 8×150', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 150, ply: 4, priceEur: 3.9, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/3120647' },
+  { name: 'Sanft&Sicher Deluxe 5-ply 8×130', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 130, ply: 5, priceEur: 5.95, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1319294' },
+  { name: 'Zewa Ultra Smart 4-ply 4×300', brand: 'Zewa', shop: 'dm', country: 'BG', rolls: 4, sheetsPerRoll: 300, ply: 4, priceEur: 5.95, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/3156432' },
+  { name: 'Zewa Ultra Smart 4-ply 8×300', brand: 'Zewa', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 300, ply: 4, priceEur: 10.95, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/3156358' },
+
+  // rest of EU
   { name: 'Kokett 4-ply 10×200', brand: 'Kokett', shop: 'ALDI Süd', country: 'DE', rolls: 10, sheetsPerRoll: 200, ply: 4, priceEur: 4.95, est: false, url: 'https://www.aldi-sued.de/newsroom/alle-pressemitteilungen/marke-und-produkte/2025/das-produkt-brauchen-alle-bei-aldi-rollen-die-preise-fuer-toilettenpapier-nach-unten' },
   { name: 'Kokett 3-ply 10×220', brand: 'Kokett', shop: 'ALDI Süd', country: 'DE', rolls: 10, sheetsPerRoll: 220, ply: 3, priceEur: 3.95, est: false, url: 'https://www.aldi-sued.de/newsroom/alle-pressemitteilungen/marke-und-produkte/2025/das-produkt-brauchen-alle-bei-aldi-rollen-die-preise-fuer-toilettenpapier-nach-unten' },
   { name: 'Kokett XXL 4-ply 20×200', brand: 'Kokett', shop: 'ALDI Süd', country: 'DE', rolls: 20, sheetsPerRoll: 200, ply: 4, priceEur: 7.49, est: false, url: 'https://www.aldi-sued.de/produkt/kokett-toilettenpapier-xxl-4-lagig-20-rollen-je-200-blatt-000000000000721316' },
