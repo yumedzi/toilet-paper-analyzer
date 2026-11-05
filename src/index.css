@@ -221,7 +221,7 @@ button {
   font-size: 13px;
   color: var(--ink-2);
 }
-.lang__opt span {
+.lang__opt span:not(.lang__pill) {
   position: relative;
 }
 .lang__opt--on {
@@ -232,6 +232,7 @@ button {
   inset: 0;
   border-radius: 999px;
   background: var(--grad);
+  box-shadow: 0 6px 16px -6px var(--pink);
 }
 
 /* ---------- result card ---------- */
