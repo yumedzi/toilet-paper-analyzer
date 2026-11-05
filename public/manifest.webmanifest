@@ -1,0 +1,9 @@
+{
+  "name": "RollCall · Toilet Paper Value",
+  "short_name": "RollCall",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0a20",
+  "theme_color": "#0f0a20",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
