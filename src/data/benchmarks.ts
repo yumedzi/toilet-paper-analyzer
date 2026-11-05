@@ -18,7 +18,7 @@ export interface Benchmark {
 }
 
 export const BENCHMARKS: Benchmark[] = [
-  // dm Bulgaria — prices (EUR) and sheets/roll read from dm-drogeriemarkt.bg on 2026-11-05
+  // dm — prices (EUR) and sheets/roll read from the dm online shop on 2026-11-05
   { name: 'Sanft&Sicher Classic 3-ply 20×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 20, sheetsPerRoll: 220, ply: 3, priceEur: 8.65, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1892806' },
   { name: 'Sanft&Sicher Classic 3-ply 10×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 10, sheetsPerRoll: 220, ply: 3, priceEur: 5.15, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/1892805' },
   { name: 'Sanft&Sicher Recycling 3-ply 8×220', brand: 'Sanft&Sicher', shop: 'dm', country: 'BG', rolls: 8, sheetsPerRoll: 220, ply: 3, priceEur: 3.2, est: false, url: 'https://www.dm-drogeriemarkt.bg/p/d/2477883' },

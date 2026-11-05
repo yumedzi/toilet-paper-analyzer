@@ -57,10 +57,10 @@ const en = {
   removed: 'Pack removed',
   winner: 'Best value',
   packN: (p: P) => `Pack #${p.n}`,
-  footer: 'Made with love for everyone who has ever stared at a wall of toilet paper. Prices: dm Bulgaria (Nov 2026) and EU shops 2025–26.',
+  footer: 'Made with love for everyone who has ever stared at a wall of toilet paper. Prices: dm and other EU shops, 2025–26.',
   method: 'How the score works',
   methodBody:
-    'We turn every pack into standard “wipes”: total sheet area × a ply factor (1-ply 1.0 · 2-ply 1.8 · 3-ply 2.5 · 4-ply 3.0 · 5-ply 3.4). More plies help, but you also use fewer sheets, so the bonus shrinks. Wipes ÷ price gives the headline number. Stars mix 70% value (compared with ~30 regular packs from dm Bulgaria, Lidl, ALDI, Albert Heijn, Mercadona, Biedronka…) and 30% comfort (ply, sheet size, softness).',
+    'We turn every pack into standard “wipes”: total sheet area × a ply factor (1-ply 1.0 · 2-ply 1.8 · 3-ply 2.5 · 4-ply 3.0 · 5-ply 3.4). More plies help, but you also use fewer sheets, so the bonus shrinks. Wipes ÷ price gives the headline number. Stars mix 70% value (compared with ~30 regular packs from dm, Lidl, ALDI, Albert Heijn, Mercadona, Biedronka…) and 30% comfort (ply, sheet size, softness).',
   verdicts: ['Not worth it', 'Overpriced', 'Meh', 'Fair deal', 'Great buy', 'Legendary roll'],
   advice: {
     bestSoFar: (p) => (p.pct ? `Best deal so far — ${p.pct}% more paper per € than “${p.name}”. 🏆` : `Ties with “${p.name}” for best deal. 🤝`),
@@ -130,10 +130,10 @@ const uk: Dict = {
   removed: 'Пачку видалено',
   winner: 'Найвигідніше',
   packN: (p) => `Пачка №${p.n}`,
-  footer: 'Зроблено з любовʼю для всіх, хто колись завис перед стіною туалетного паперу. Ціни: dm Bulgaria (листопад 2026) і магазини ЄС 2025–26.',
+  footer: 'Зроблено з любовʼю для всіх, хто колись завис перед стіною туалетного паперу. Ціни: dm та інші магазини ЄС, 2025–26.',
   method: 'Як рахується оцінка',
   methodBody:
-    'Кожну пачку переводимо у стандартні «витирання»: загальна площа аркушів × коефіцієнт шарів (1 шар 1.0 · 2 — 1.8 · 3 — 2.5 · 4 — 3.0 · 5 — 3.4). Більше шарів — краще, але й аркушів іде менше, тож бонус спадає. Витирання ÷ ціна = головна цифра. Зірки: 70% вигода (порівняно з ~30 звичайними пачками з dm Bulgaria, Lidl, ALDI, Albert Heijn, Mercadona, Biedronka…) і 30% комфорт (шари, розмір аркуша, мʼякість).',
+    'Кожну пачку переводимо у стандартні «витирання»: загальна площа аркушів × коефіцієнт шарів (1 шар 1.0 · 2 — 1.8 · 3 — 2.5 · 4 — 3.0 · 5 — 3.4). Більше шарів — краще, але й аркушів іде менше, тож бонус спадає. Витирання ÷ ціна = головна цифра. Зірки: 70% вигода (порівняно з ~30 звичайними пачками з dm, Lidl, ALDI, Albert Heijn, Mercadona, Biedronka…) і 30% комфорт (шари, розмір аркуша, мʼякість).',
   verdicts: ['Не варто', 'Задорого', 'Так собі', 'Чесна ціна', 'Чудова покупка', 'Легендарний рулон'],
   advice: {
     bestSoFar: (p) => (p.pct ? `Найкраща угода! На ${p.pct}% більше паперу за €, ніж «${p.name}». 🏆` : `Нарівні з «${p.name}» за вигідністю. 🤝`),

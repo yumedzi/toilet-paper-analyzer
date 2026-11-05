@@ -13,7 +13,7 @@ const SIZES: { w: number; h: number; tag: string }[] = [
   { w: 10, h: 10, tag: '□' },
   { w: 10, h: 13.5, tag: 'XL' },
 ]
-// Bulgarian dm packs first (primary shopping area), then a few EU shelf classics
+// dm packs first, then a few EU shelf classics
 const PICK = [
   'Sanft&Sicher Classic 3-ply 10×220',
   'Sanft&Sicher Recycling 3-ply 8×220',
@@ -56,7 +56,7 @@ export function EntryForm({ draft, set, priceRef }: Props) {
               }}
             >
               <b>{b.brand}</b> {b.ply}× · {b.rolls}×{b.sheetsPerRoll}
-              <small>{b.shop} {b.country === 'BG' ? '🇧🇬' : ''}</small>
+              <small>{b.shop}</small>
             </button>
           ))}
         </div>
