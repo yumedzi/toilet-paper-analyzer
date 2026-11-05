@@ -1,5 +1,7 @@
 export const haptic = (ms: number | number[] = 8) => {
   try {
+    // browsers block vibrate until the user has interacted with the page
+    if ((navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive === false) return
     navigator.vibrate?.(ms)
   } catch {
     /* not supported */
