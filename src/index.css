@@ -103,6 +103,8 @@ button {
   inset: 0;
   z-index: -1;
   overflow: hidden;
+  isolation: isolate;
+  contain: strict;
   background: radial-gradient(120% 80% at 50% 0%, var(--bg2), var(--bg) 70%);
 }
 .aurora i {
@@ -114,6 +116,9 @@ button {
   opacity: 0.45;
   mix-blend-mode: screen;
   animation: drift 22s ease-in-out infinite alternate;
+  /* own GPU layers: keeps backdrop-filter glass above from re-rasterising/flickering */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .aurora i:nth-child(1) {
   background: var(--pink);
@@ -392,12 +397,13 @@ button {
   gap: 8px;
   padding: 8px 16px;
   border-radius: 999px;
-  background: var(--glass-2);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
   border: 1px solid var(--glass-edge);
   box-shadow: var(--shadow);
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   white-space: nowrap;
+  transform: translateZ(0);
 }
 .mini__num {
   font-family: var(--display);

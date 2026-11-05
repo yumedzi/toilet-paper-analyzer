@@ -70,10 +70,18 @@ export default function App() {
   // mini sticky score once the big card leaves the viewport
   // (scroll-based, so it never shows while the header/big score is visible — e.g. right after load)
   useEffect(() => {
+    let shown = false
     const check = () => {
       const el = cardRef.current
-      // show only when scrolled down AND the big score's number row is above the viewport
-      setShowMini(!!el && window.scrollY > 120 && el.getBoundingClientRect().top + 110 < 0)
+      if (!el) return
+      // hysteresis: appear once the big number is well above the fold, hide only when it's clearly back,
+      // so slow scrolling around the boundary can't make the pill flicker on/off
+      const top = el.getBoundingClientRect().top
+      const next = shown ? top + 60 < 0 : window.scrollY > 120 && top + 130 < 0
+      if (next !== shown) {
+        shown = next
+        setShowMini(next)
+      }
     }
     check()
     window.addEventListener('scroll', check, { passive: true })
